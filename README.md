@@ -30,5 +30,5 @@ if you want to have user or group access to the
 `/etc/udev/rules.d/40-delcom-usbled-807241.rules`:
 
     SUBSYSTEM=="usb", ATTRS{idVendor}=="0fc5", ATTRS{idProduct}=="1223", GROUP="plugdev", MODE="0666"
-    
+
 With dis rule all users in the `plugdev` group can access the USB Led.
