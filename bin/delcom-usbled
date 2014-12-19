@@ -1,0 +1,25 @@
+#! /usr/bin/evn python
+
+import delcom_usbled.usbled as led
+import argparse
+
+
+parser = argparse.ArgumentParser(description='Commandline tool for the Delcom 807241 Usb LED.')
+
+parser.add_argument('-r', '--red', dest='red', action='store_true', help='enable the red LED')
+parser.add_argument('-y', '--yellow', dest='yellow', action='store_true', help='enable the yellow LED')
+parser.add_argument('-g', '--green', dest='green', action='store_true', help='enable the green LED')
+parser.add_argument('-o', '--off', dest='off', action='store_true',
+                    help='disable all LEDs (overrides the other switches)')
+
+
+if __name__ == '__main__':
+    args = parser.parse_args()
+
+    try:
+        if args.off or (not args.red and not args.yellow and not args.green):
+            led.UsbLed().set(off=True)
+        else:
+            led.UsbLed().set(red=args.red, yellow=args.yellow, green=args.green)
+    except ValueError as e:
+        print e
